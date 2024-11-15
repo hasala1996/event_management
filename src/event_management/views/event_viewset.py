@@ -30,13 +30,6 @@ class EventViewSet(viewsets.ModelViewSet):
     search_fields = ["name", "description"]
     ordering_fields = ["date", "name"]
     ordering = ["date"]
-    required_permissions = {
-        "list": ["view_event"],
-        "retrieve": ["view_event"],
-        "create": ["add_event"],
-        "update": ["change_event"],
-        "destroy": ["delete_event"],
-    }
 
     @verify_permission("view_event")
     def list(self, request, *args, **kwargs):

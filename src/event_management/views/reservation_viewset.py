@@ -28,7 +28,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
         filters.OrderingFilter,
     ]
     filterset_fields = ["event", "status"]
-    search_fields = ["event__name", "attendee__email"]
+    search_fields = ["event__name", "attendee__user__email"]
     ordering_fields = ["reservation_date"]
     ordering = ["reservation_date"]
 

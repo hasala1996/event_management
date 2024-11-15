@@ -23,11 +23,10 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Your Project API",
+        title="Challange Viamericas",
         default_version="v1",
-        description="API documentation for Your Project",
-        terms_of_service="https://www.yourproject.com/terms/",
-        contact=openapi.Contact(email="contact@yourproject.com"),
+        description="API documentation for Viamericas Challange",
+        contact=openapi.Contact(email="hamiltonlara_11@hotmail.com"),
         license=openapi.License(name="BSD License"),
     ),
     public=True,
