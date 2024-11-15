@@ -83,6 +83,8 @@ class Command(BaseCommand):
         for i in range(5):
             user, created = User.objects.get_or_create(
                 email=f"attendee{i+1}@example.com",
+                first_name=f"attendee{i+1}",
+                last_name=f"Apellido{i+1}",
                 defaults={"username": f"attendee{i+1}"},
             )
             if created:

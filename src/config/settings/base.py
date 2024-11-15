@@ -50,6 +50,7 @@ BASE_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "drf_yasg",
+    "django_extensions",
 ]
 LOCAL_APPS = ["security", "core", "event_management"]
 

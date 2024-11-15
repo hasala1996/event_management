@@ -2,11 +2,13 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
-from event_management.models import Event
+from event_management.models import Event, Attendee
 from event_management.serializers import EventSerializer, EventCreateUpdateSerializer
 from core.utils.authorizer_permission import AuthorizerPermission
 from .filters import EventFilter
 from core.utils.verify_permission import verify_permission
+from rest_framework.decorators import action
+from core.utils.pagination import CustomPageNumberPagination
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -18,6 +20,7 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = [AuthorizerPermission]
+    pagination_class = CustomPageNumberPagination
     filter_backends = [
         DjangoFilterBackend,
         filters.SearchFilter,
@@ -94,3 +97,33 @@ class EventViewSet(viewsets.ModelViewSet):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(
+        detail=False, methods=["get"], url_path="list-events", url_name="list_events"
+    )
+    def list_events(self, request):
+        """
+        Custom action to list events with their name and ID.
+        """
+        events = Event.objects.values("id", "name")
+        return Response(events, status=status.HTTP_200_OK)
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="list-attendees",
+        url_name="list_attendees",
+    )
+    def list_attendees(self, request):
+        """
+        Custom action to list attendees with their full name and ID.
+        """
+        attendees = Attendee.objects.values("id", "user__first_name", "user__last_name")
+        formatted_attendees = [
+            {
+                "id": attendee["id"],
+                "full_name": f"{attendee['user__first_name']} {attendee['user__last_name']}",
+            }
+            for attendee in attendees
+        ]
+        return Response(formatted_attendees, status=status.HTTP_200_OK)

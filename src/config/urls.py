@@ -45,5 +45,5 @@ urlpatterns = [
     ),
     path(API + "admin/", admin.site.urls),
     path(API + "auth/", include("security.auth_urls")),
-    path(API + "event/", include("event_management.urls")),
+    path(API + "event_management/", include("event_management.urls")),
 ]

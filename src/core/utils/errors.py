@@ -57,6 +57,10 @@ class FormErrors:
         "code": "FORM008",
         "message": "The event date cannot be in the past",
     }
+    DUPLICATE_RESERVATION = {
+        "code": "FORM009",
+        "message": "You already have a reservation for this event.",
+    }
 
 
 class AuthErrors:

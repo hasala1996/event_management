@@ -18,6 +18,18 @@ class Event(BaseModel):
     )
     speakers = models.ManyToManyField(Speaker, related_name="events")
     is_featured = models.BooleanField(default=False)
+    total_slots = models.PositiveIntegerField(default=0)
+
+    @property
+    def available_slots(self):
+        """
+        Calculate the number of available slots for the event.
+
+        Returns:
+            int: The number of available slots.
+        """
+        confirmed_reservations = self.reservation_set.filter(status="Confirmed").count()
+        return max(self.total_slots - confirmed_reservations, 0)
 
     def __str__(self):
         return self.name
