@@ -1,0 +1,13 @@
+**/.env
+docker-compose.yml
+./docker-compose.yml
+**/__pycache__
+**/*.pyc
+*.pyc
+**/.pytest_cache
+**/*.coverage
+**/*.coverage.xml
+*.coverage
+*.coverage.xml
+sonar_test.sh
+sonar_test.sh
