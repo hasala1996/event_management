@@ -7,5 +7,5 @@ router = SimpleRouter()
 
 
 urlpatterns = router.urls + [
-    path("login", MyTokenObtainPairView.as_view(), name="login")
+    path("login/", MyTokenObtainPairView.as_view(), name="login")
 ]
