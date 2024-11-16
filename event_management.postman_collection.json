@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "9a01ec14-f87d-49ac-be0c-cff9548c694e",
+		"name": "event_management",
+		"description": "# 🚀\n\n### **API Overview**\n\nThe **Event Management API** is designed to handle events, attendees, and reservations. It provides complete functionality for user management, authentication, event creation and updates, as well as reservation handling. The API is structured into three main modules:\n\n1. **Auth:** Manages user authentication using JWT for secure access.\n    \n2. **Event:** Allows creation, retrieval, updating, and deletion of events, along with attendee-related information.\n    \n3. **Reservation:** Handles event reservations, including creation, retrieval, updating, and cancellation.  \n    \n\n### **Key Features**\n\n- **Authentication:** JWT-based security to protect endpoints.\n    \n- **Event Management:** Create, list, update, and delete events, with support for categories, locations, and speakers.\n    \n- **Reservation Management:** Register, retrieve, and manage the status of reservations made by attendees.\n    \n- **Efficiency:** Endpoints optimized for selective lists and detailed views.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22711696"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();",
+									"pm.environment.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"attendee1@example.com\",\n    \"password\":\"abcd.1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login",
+								""
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "event",
+			"item": [
+				{
+					"name": "listEvent",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/event_management/event/?page=1&size=2&category=&ordering=date&search=3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"event",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "2"
+								},
+								{
+									"key": "category",
+									"value": ""
+								},
+								{
+									"key": "ordering",
+									"value": "date"
+								},
+								{
+									"key": "search",
+									"value": "3"
+								}
+							]
+						},
+						"description": "Retrieves a comprehensive list of all available events, including key information such as name, date, location, and category. This endpoint is designed to provide an overview of events for general display purposes."
+					},
+					"response": []
+				},
+				{
+					"name": "ListEventSelect",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/event_management/event/list-events/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"event",
+								"list-events",
+								""
+							]
+						},
+						"description": "This endpoint retrieves a list of events from the event management system.\n\n### Response\n\nThe response for this request is a JSON object conforming to the following schema:\n\nThis schema defines an object with a property \"events\", which is an array of objects. Each object in the \"events\" array represents an event and has properties such as \"id\", \"name\", \"date\", \"location\", and \"description\"."
+					},
+					"response": []
+				},
+				{
+					"name": "ListAttendeesSelect",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/event_management/event/list-attendees/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"event",
+								"list-attendees",
+								""
+							]
+						},
+						"description": "Returns a simplified list of events optimized for dropdown menus or selectors. This endpoint provides only essential data, such as event names and IDs, to reduce payload size for UI components."
+					},
+					"response": []
+				},
+				{
+					"name": "eventById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/event_management/event/:event_id/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"event",
+								":event_id",
+								""
+							],
+							"variable": [
+								{
+									"key": "event_id",
+									"value": "c1d76de2-3071-4b4a-a1d8-614db56ad95f"
+								}
+							]
+						},
+						"description": "Retrieves detailed information for a specific event using its unique ID. The response includes all event attributes, such as description, total slots, available slots, and associated speaker."
+					},
+					"response": []
+				},
+				{
+					"name": "createEvent",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tech Conference 2024\",\r\n    \"description\": \"A conference focused on emerging tech trends.\",\r\n    \"date\": \"2025-05-15T10:00:00Z\",\r\n    \"location\": \"New York Convention Center\",\r\n    \"is_featured\": true,\r\n    \"category\": \"1e6b997c-5be6-4fdd-9d12-c0cef9fe2372\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/event_management/event/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"event",
+								""
+							]
+						},
+						"description": "Enables users with the appropriate permissions to create a new event. Users must provide details such as name, description, date, location, category, and optional speaker assignments. Validation ensures that event dates are in the future."
+					},
+					"response": []
+				},
+				{
+					"name": "updateEvent",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tech  2024\",\r\n    \"description\": \"A conference focused on emerging tech trends.\",\r\n    \"date\": \"2025-05-15T10:00:00Z\",\r\n    \"location\": \"Center\",\r\n    \"is_featured\": false,\r\n    \"category\": \"1e6b997c-5be6-4fdd-9d12-c0cef9fe2372\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/event_management/event/:event_id/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"event",
+								":event_id",
+								""
+							],
+							"variable": [
+								{
+									"key": "event_id",
+									"value": "c1d76de2-3071-4b4a-a1d8-614db56ad95f"
+								}
+							]
+						},
+						"description": "Updates an existing event's data. This includes modifying fields such as the name, date, description, location, and whether the event is featured. The endpoint validates data and ensures permissions before applying changes."
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEvent",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/event_management/event/:event_id/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"event",
+								":event_id",
+								""
+							],
+							"variable": [
+								{
+									"key": "event_id",
+									"value": "be05366e-20ac-4f63-b8e8-01e364201027"
+								}
+							]
+						},
+						"description": "Deletes a specific event identified by its ID. Only users with the correct permissions can perform this action. Deleting an event also removes associated reservations and dependencies."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reservation",
+			"item": [
+				{
+					"name": "listReservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/event_management/reservation/?page=1&size=8&search=attendee5@example.com",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"reservation",
+								""
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "size",
+									"value": "8"
+								},
+								{
+									"key": "search",
+									"value": "attendee5@example.com"
+								},
+								{
+									"key": "event__name",
+									"value": "5",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Provides a paginated list of all reservations, displaying basic information about each reservation, including attendee details, event names, reservation status, and reservation dates. This endpoint is useful for managing and monitoring registrations"
+					},
+					"response": []
+				},
+				{
+					"name": "reservationById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/event_management/reservation/:reservation_id/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"reservation",
+								":reservation_id",
+								""
+							],
+							"variable": [
+								{
+									"key": "reservation_id",
+									"value": "f6b3bd52-7330-4c65-9bae-2f321e227da8"
+								}
+							]
+						},
+						"description": "Retrieves detailed information about a specific reservation using its unique ID. This includes the event associated with the reservation, attendee details, and the current reservation status."
+					},
+					"response": []
+				},
+				{
+					"name": "createReservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Tech Conference 2024\",\r\n    \"description\": \"A conference focused on emerging tech trends.\",\r\n    \"date\": \"2025-05-15T10:00:00Z\",\r\n    \"location\": \"New York Convention Center\",\r\n    \"is_featured\": true,\r\n    \"category\": \"1e6b997c-5be6-4fdd-9d12-c0cef9fe2372\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/event_management/reservation/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"reservation",
+								""
+							]
+						},
+						"description": "Allows attendees to register for a specific event by creating a reservation. The endpoint checks for available slots and validates attendee information before confirming the reservation."
+					},
+					"response": []
+				},
+				{
+					"name": "updateReservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"event\": \"cefcc14e-abde-41f6-bd02-e647460fa650\",\r\n    \"reservation_date\": \"2024-11-14T23:52:23.502673Z\",\r\n    \"status\": \"Pending\",\r\n    \"attendee\":\"73a63878-037a-417b-959a-61e15172ec70\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/event_management/reservation/:reservation_id/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"reservation",
+								":reservation_id",
+								""
+							],
+							"variable": [
+								{
+									"key": "reservation_id",
+									"value": "f6b3bd52-7330-4c65-9bae-2f321e227da8"
+								}
+							]
+						},
+						"description": "Updates an existing reservation. This includes changing the reservation status (e.g., \"Pending\" to \"Confirmed\") or modifying other details. Permissions are checked to ensure only authorized users can perform updates."
+					},
+					"response": []
+				},
+				{
+					"name": "deleteReservation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/event_management/reservation/:reservation_id/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"event_management",
+								"reservation",
+								":reservation_id",
+								""
+							],
+							"variable": [
+								{
+									"key": "reservation_id",
+									"value": ""
+								}
+							]
+						},
+						"description": "Cancels a specific reservation identified by its ID. This action is restricted to administrators or attendees with valid access to the reservation. Cancellations are validated to prevent accidental data loss."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
