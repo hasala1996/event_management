@@ -71,5 +71,8 @@ The OpenAPI docs are located here: `http://localhost:8000/docs/`
 Remember to run the login and copy the token, then click Authorize at the top right and add the word Bearer <token>
 However, the postman collection is available in the repo so you can import it.
 
+### 10. Database diagram
+The ER diagram is available in the repo, it is the file `db_diagram_viamericas.png` .
+
 ### Contact
 If you encounter issues or have questions, please reach out to the project maintainer at hasalara96@gmail.com
