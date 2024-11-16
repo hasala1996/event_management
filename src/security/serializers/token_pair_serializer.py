@@ -47,7 +47,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             dict: Contains the access token.
         """
         self.user = self._authenticate_user(attrs)
-
         self._validate_user_status(self.user)
 
         token = self.get_token(self.user)
@@ -84,6 +83,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             raise CustomAPIException(
                 detail=AuthErrors.INVALID_EMAIL_PASSWORD["message"],
                 code=AuthErrors.INVALID_EMAIL_PASSWORD["code"],
+                status_code=401,
             )
 
         return user

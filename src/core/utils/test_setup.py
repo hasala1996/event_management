@@ -1,6 +1,6 @@
 from faker import Faker
 from rest_framework.test import APITestCase
-from event_management.models import Event, Reservation, Attendee, Category
+from event_management.models import Event, Reservation, Attendee, Category, Speaker
 from security.models import User, Rol, UserRol
 from django.contrib.auth.models import Permission
 from django.conf import settings
@@ -171,4 +171,16 @@ class TestSetup(APITestCase):
             name=kwargs.get("name", faker.word()),
             description=kwargs.get("description", faker.text(max_nb_chars=50)),
             active=kwargs.get("active", True),
+        )
+
+    def create_speaker(self, **kwargs):
+        """
+        Create a test speaker.
+
+        Returns:
+            Speaker: The created speaker instance.
+        """
+        return Speaker.objects.create(
+            name=kwargs.get("name", faker.name()),
+            email=kwargs.get("email", faker.email()),
         )

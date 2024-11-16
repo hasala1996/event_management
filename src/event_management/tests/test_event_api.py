@@ -54,7 +54,7 @@ class TestEventAPI(TestSetup):
         response = self.client.post(self.url, self.event_data)
         assert response.status_code == 400
         response_data = response.json()
-        assert response_data["message"] == ["The event date cannot be in the past"]
+        assert response_data["message"] == "The event date cannot be in the past"
 
     def test_create_event_missing_data(self):
         """

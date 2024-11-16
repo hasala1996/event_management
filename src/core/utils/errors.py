@@ -4,14 +4,14 @@ from rest_framework.exceptions import APIException
 class CustomAPIException(APIException):
     status_code = 400
 
-    def __init__(self, detail, code):
+    def __init__(self, detail, code, status_code=400):
         super().__init__(detail)
         self.detail = {
-            "message": [detail],
-            "status": code,
-            "data": None,
+            "message": detail,
             "code": code,
         }
+        if status_code:
+            self.status_code = status_code
 
 
 class APIErrors:

@@ -47,7 +47,7 @@ class TestReservationAPI(TestSetup):
         response = self.client.post(self.url, self.reservation_data)
         assert response.status_code == 400
         response_data = response.json()
-        assert response_data["message"] == ["This event has no available slots."]
+        assert response_data["message"] == "This event has no available slots."
 
     def test_list_reservations(self):
         """

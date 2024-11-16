@@ -20,8 +20,7 @@
       "cwd": "${workspaceFolder}/src",
       "envFile": "${workspaceFolder}/.env",
       "args": [
-        // "event_management",
-        "event_management/tests/test_reservation_api.py::TestReservationAPI", // Test específico
+        "-s",
         "--disable-warnings",
       ],
       "django": true,
