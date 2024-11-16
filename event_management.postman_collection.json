@@ -58,6 +58,57 @@
 			"name": "event",
 			"item": [
 				{
+					"name": "Report",
+					"item": [
+						{
+							"name": "generateReport",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/event_management/event/generate-report/?category_id=ce43653d-c4ed-4e17-a0f1-c90db1b4fca1&start_date=2024-12-04&end_date=2024-12-05",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"event_management",
+										"event",
+										"generate-report",
+										""
+									],
+									"query": [
+										{
+											"key": "category_id",
+											"value": "ce43653d-c4ed-4e17-a0f1-c90db1b4fca1"
+										},
+										{
+											"key": "start_date",
+											"value": "2024-12-04"
+										},
+										{
+											"key": "end_date",
+											"value": "2024-12-05"
+										}
+									]
+								},
+								"description": "**Query Parameters**:\n\n1. **`category_id`** (optional)\n    \n\n- **Type**: UUID\n    \n- **Description**: Filters events by the specified category ID.\n    \n- Example: ?category_id=123e4567-e89b-12d3-a456-426614174000\n    \n\n2\\. start_date ( optional)\n\n- **Type**: Date (YYYY-MM-DD)\n    \n- **Description**: Includes only events starting from this date.\n    \n- Example : ?start_date=2024-01-01&end_date=2024-01-02\n    \n\nALL EVENTS :\n\nGET /event_management/event/generate-report/"
+							},
+							"response": []
+						}
+					],
+					"description": "Generates an Excel report containing details of events. The report can be customized using query parameters to filter events by category and/or date range.\n\n**Query Parameters**:\n\n1. **`category_id`** (optional)\n    \n\n- **Type**: UUID\n    \n- **Description**: Filters events by the specified category ID.\n    \n- Example: ?category_id=123e4567-e89b-12d3-a456-426614174000\n    \n\n2\\. start_date ( optional)\n\n- **Type**: Date (YYYY-MM-DD)\n    \n- **Description**: Includes only events starting from this date.\n    \n- Example : ?start_date=2024-01-01&end_date=2024-01-02\n    \n\nALL EVENTS :\n\nGET /event_management/event/generate-report/"
+				},
+				{
 					"name": "listEvent",
 					"request": {
 						"auth": {

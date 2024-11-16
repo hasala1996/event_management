@@ -3,12 +3,18 @@ from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from event_management.models import Event, Attendee
-from event_management.serializers import EventSerializer, EventCreateUpdateSerializer
+from event_management.serializers import (
+    EventSerializer,
+    EventCreateUpdateSerializer,
+    EventReportSerializer,
+)
 from core.utils.authorizer_permission import AuthorizerPermission
 from .filters import EventFilter
 from core.utils.verify_permission import verify_permission
 from rest_framework.decorators import action
 from core.utils.pagination import CustomPageNumberPagination
+from django.http import HttpResponse
+from django.utils.timezone import now
 
 
 class EventViewSet(viewsets.ModelViewSet):
@@ -122,3 +128,24 @@ class EventViewSet(viewsets.ModelViewSet):
             for attendee in attendees
         ]
         return Response(formatted_attendees, status=status.HTTP_200_OK)
+
+    @action(
+        detail=False,
+        methods=["get"],
+        url_path="generate-report",
+        url_name="generate_report",
+    )
+    def generate_report(self, request):
+        """
+        Custom action to generate an Excel report for events.
+        """
+        serializer = EventReportSerializer(data=request.query_params)
+        serializer.is_valid(raise_exception=True)
+        excel_file = serializer.generate_report()
+        filename = f"event_report_{now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        response = HttpResponse(
+            excel_file,
+            content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}"'
+        return response

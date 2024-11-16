@@ -74,5 +74,8 @@ However, the postman collection is available in the repo so you can import it.
 ### 10. Database diagram
 The ER diagram is available in the repo, it is the file `db_diagram_viamericas.png` .
 
+### 11. Reports
+To generate the reports in .xlsx use the endpoint located in the Report folder within Event, in the postman collection.
+
 ### Contact
 If you encounter issues or have questions, please reach out to the project maintainer at hasalara96@gmail.com

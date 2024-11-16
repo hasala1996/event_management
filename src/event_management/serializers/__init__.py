@@ -2,3 +2,4 @@ from .event_serializer import EventSerializer
 from .event_create_update_serializer import EventCreateUpdateSerializer
 from .reservation_serializer import ReservationListSerializer
 from .reservation_create_update_serializer import ReservationCreateUpdateSerializer
+from .event_report_serializer import EventReportSerializer
