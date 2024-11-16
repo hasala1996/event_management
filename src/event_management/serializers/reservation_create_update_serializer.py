@@ -11,7 +11,7 @@ class ReservationCreateUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Reservation
-        fields = ["event", "attendee", "reservation_date", "status"]
+        fields = ["id", "event", "attendee", "reservation_date", "status"]
 
     def validate_event(self, value):
         """

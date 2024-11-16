@@ -10,21 +10,24 @@
         "runserver"
       ],
       "django": true,
-      "justMyCode": true,
+      "justMyCode": true
     },
     {
       "name": "Pytest",
       "type": "python",
       "request": "launch",
       "module": "pytest",
+      "cwd": "${workspaceFolder}/src",
+      "envFile": "${workspaceFolder}/.env",
       "args": [
-        "-s",
-        "src/"
+        // "event_management",
+        "event_management/tests/test_reservation_api.py::TestReservationAPI", // Test específico
+        "--disable-warnings",
       ],
-      "console": "integratedTerminal",
+      "django": true,
+      "justMyCode": true,
       "env": {
-        "PYTHONPATH": "${workspaceFolder}/src",
-        "DJANGO_SETTINGS_MODULE": "src.settings.base"
+        "DJANGO_SETTINGS_MODULE": "config.settings.settings_test" // Apunta a tu settings de test
       }
     }
   ]

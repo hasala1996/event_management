@@ -61,6 +61,10 @@ class FormErrors:
         "code": "FORM009",
         "message": "You already have a reservation for this event.",
     }
+    MISSING_DESCRIPTION = {
+        "code": "FORM010",
+        "message": "A featured event must have a description",
+    }
 
 
 class AuthErrors:

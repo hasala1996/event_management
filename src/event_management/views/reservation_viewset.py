@@ -69,7 +69,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
         """
         Update a reservation with custom validations.
         """
-        partial = kwargs.pop("partial", False)
+        partial = kwargs.pop("partial", True)
         instance = self.get_object()
         serializer = ReservationCreateUpdateSerializer(
             instance, data=request.data, partial=partial

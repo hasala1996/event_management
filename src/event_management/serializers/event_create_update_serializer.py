@@ -60,7 +60,16 @@ class EventCreateUpdateSerializer(serializers.ModelSerializer):
         """
         if attrs.get("is_featured") and not attrs.get("description"):
             raise CustomAPIException(
-                detail="A featured event must have a description.",
+                detail=FormErrors.MISSING_DESCRIPTION["message"],
                 code=FormErrors.MISSING_DESCRIPTION["code"],
             )
         return attrs
+
+    def update(self, instance, validated_data):
+        """
+        Handles partial updates for Event instances.
+        """
+        for field, value in validated_data.items():
+            setattr(instance, field, value)
+        instance.save()
+        return instance
