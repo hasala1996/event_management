@@ -1,0 +1,10 @@
+DB_HOST =tus_datos
+DB_NAME=tus_datos
+DB_USER=tus_datos
+DB_PASSWORD=tus_datos
+CONFIG_SETTINGS=config.settings.base
+DEBUG=tus_datos
+DB_PORT=tus_datos
+SECRET_KEY=tus_datos
+CORS_ALLOWED_ORIGINS=tus_datos
+ALLOWED_HOSTS =tus_datos
