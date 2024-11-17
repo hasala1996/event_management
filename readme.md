@@ -64,26 +64,53 @@ You can review or customize the seed data by editing the `seed_data.py` file.
 
 ### 7. Create a Superuser
 To access the admin portal, create a superuser:
-python manage.py createsuperuser
-Follow the prompts to set up the username, email, and password.
+- python manage.py createsuperuser
+- Follow the prompts to set up the username, email, and password.
 
 ### 8. Run the Development Server
 Start the Django development server:
-python manage.py runserver
+- python manage.py runserver
 
 Visit `http://localhost:8000/v1/api/admin/` to access the admin portal.
 Once you are inside the Admin portal, you will be able to manage roles, permissions (full crud on events and reservations), users and more.
 
-### 9. Docs
-The OpenAPI docs are located here: `http://localhost:8000/docs/`
-Remember to run the login and copy the token, then click Authorize at the top right and add the word Bearer <token>
-However, the postman collection is available in the repo so you can import it.
+### 9. Running the Project with Docker:
+To simplify the setup and ensure consistency across development environments, you can run the project using Docker and Docker Compose.
 
-### 10. Database diagram
+## Prerequisites
+- Docker: Make sure Docker is installed on your machine. You can download it from Docker Desktop.
+- Docker Compose: Usually included with Docker Desktop. Verify it's installed by running docker-compose --version in your terminal.
+### Build and Run the Containers
+Being in the src folder of the project, execute:
+
+- docker-compose up --build
+
+This command will:
+
+- Build the Docker image for your Django application.
+- Start the services defined in docker-compose.yml, which include the backend (Django) and the PostgreSQL database.
+- Apply migrations and start the development server.
+
+
+### 10. Docs
+- The OpenAPI docs are located here: `http://localhost:8000/docs/`
+- Remember to run the login and copy the token, then click Authorize at the top right and add the word Bearer <token>
+- However, the postman collection is available in the repo so you can import it.
+
+### 11. Database diagram
 The ER diagram is available in the repo, it is the file `db_diagram_viamericas.png` .
 
-### 11. Reports
+### 12. Reports
 To generate the reports in .xlsx use the endpoint located in the Report folder within Event, in the postman collection.
+
+### 13. Coverage
+To execute the test coverage commands while located in the `src` directory of the project, follow these steps:
+- Navigate to the src Directory
+- Open your terminal or command prompt and change to the src directory of your project , and execute:
+`coverage run -m pytest --ds=config.settings.settings_test`
+After the tests have been executed, generate a coverage report with:
+`coverage report -m`
+This report provides a summary of the code coverage.
 
 ### Contact
 If you encounter issues or have questions, please reach out to the project maintainer at hasalara96@gmail.com
