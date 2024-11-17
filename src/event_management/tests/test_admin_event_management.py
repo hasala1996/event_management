@@ -2,7 +2,6 @@ import pytest
 from django.urls import reverse
 from event_management.models import Event
 from core.utils.test_setup import TestSetup
-from django.test import Client
 from django.contrib.auth import get_user_model
 
 
@@ -18,12 +17,10 @@ class TestEventManagementAdmin(TestSetup):
         """
         super().setUp()
 
-        # Create a superuser and log in
         self.superuser = get_user_model().objects.create_superuser(
             email="admin@example.com", password="admin123"
         )
         self.client.login(email="admin@example.com", password="admin123")
-        # Create test data using methods from TestSetup
         self.category = self.create_category(name="Tech", description="Tech Events")
         self.event = self.create_event(name="Test Event", category=self.category)
         self.attendee = self.create_attendee()
@@ -31,10 +28,6 @@ class TestEventManagementAdmin(TestSetup):
             event=self.event, attendee=self.attendee
         )
         self.speaker = self.create_speaker()
-
-    # ------------------------
-    # Test: Event Admin
-    # ------------------------
 
     def test_event_admin_list_view(self):
         """
@@ -52,23 +45,22 @@ class TestEventManagementAdmin(TestSetup):
         """
         url = reverse("admin:event_management_event_add")
 
-        # Load the form page to set up CSRF
         self.client.get(url)
 
         data = {
             "name": "New Event",
             "description": "New Event Description",
-            "date_0": "2025-01-01",  # Date part of the split field
-            "date_1": "10:00:00",  # Time part of the split field
+            "date_0": "2025-01-01",
+            "date_1": "10:00:00",
             "location": "New York",
             "category": self.category.id,
             "is_featured": False,
             "speakers": str(self.speaker.id),
         }
         response = self.client.post(url, data)
-        print(response.content.decode())  # Debug: Check form errors if test fails
+        print(response.content.decode())
 
-        assert response.status_code == 302  # Redirect indicates success
+        assert response.status_code == 302
         assert Event.objects.filter(name="New Event").exists()
 
     def test_event_admin_change_view(self):
@@ -112,10 +104,6 @@ class TestEventManagementAdmin(TestSetup):
         assert response.status_code == 302
         self.event.refresh_from_db()
         assert self.event.is_featured is True
-
-    # ------------------------
-    # Test: Reservation Admin
-    # ------------------------
 
     def test_reservation_admin_list_view(self):
         """
