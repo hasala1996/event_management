@@ -48,13 +48,14 @@ Run migrations to set up the database schema:
 - python manage.py migrate
 
 ### 6. Seed Initial Data
-After applying the database migrations, you can populate the database with initial data by running the custom seed script located at `src/core/management/commands/seed_data.py`.
+After applying the database migrations, you can populate the database with initial data by running the custom seed script located at
+- `src/core/management/commands/seed_data.py`.
 
 This script sets up basic data such as roles, categories, and other initial configurations required for the project to function properly.
 
 #### Run the Seed Script
 Execute the following command:
-python manage.py seed_data
+- python manage.py seed_data
 
 #### What Does the Seed Script Do?
 - Creates default **roles** (e.g., Admin, Event Manager).
