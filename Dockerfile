@@ -4,8 +4,8 @@ FROM python:slim-buster
 WORKDIR /app
 
 # Copiar y instalar las dependencias
-COPY requeriments/requeriments.txt .
-RUN pip install --no-cache-dir -r requeriments.txt
+COPY requirements/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copiar el código de la aplicación al contenedor
 COPY . .
