@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  back:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: dev_back
+    image: back:dev
+    restart: always
+    volumes:
+      - .:/app
+      - logs:/var/log
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./src/.env
+    environment:
+      DJANGO_SETTINGS_MODULE: ${CONFIG_SETTINGS}
+    depends_on:
+      - db
+    networks:
+      - viamericas
+
+  db:
+    image: postgres:16
+    container_name: dev_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - db_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"
+    networks:
+      - viamericas
+
+networks:
+  viamericas:
+    driver: bridge
+
+volumes:
+  logs:
+  db_data:
