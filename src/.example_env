@@ -1,4 +1,5 @@
 DB_HOST =tus_datos
+# for docker user DB_HOST = db
 DB_NAME=tus_datos
 DB_USER=tus_datos
 DB_PASSWORD=tus_datos
