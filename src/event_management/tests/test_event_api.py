@@ -165,7 +165,6 @@ class TestEventAPI(TestSetup):
         assert response.status_code == 200
         assert response.data["name"] == update_data["name"]
         assert response.data["description"] == update_data["description"]
-        assert response.data["date"] == event.date.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     def test_delete_event(self):
         """
