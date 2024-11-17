@@ -43,5 +43,5 @@ jobs:
       - name: Run Tests with Coverage
         run: |
           cd src
-          coverage run -m pytest --ds=config.settings.settings_test
+          coverage run -m pytest --ds=config.settings.settings_test --disable-warnings
           coverage report -m
