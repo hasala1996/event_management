@@ -27,7 +27,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements/requirements.txt
 
+      - name: Load environment variables from .env
+        run: |
+          cp ./src/.env .env
+          export $(cat .env | xargs)
+
       - name: Run Tests with Coverage
+        env:
+          $(cat .env | xargs)
         run: |
           cd src
           coverage run -m pytest --ds=config.settings.settings_test
