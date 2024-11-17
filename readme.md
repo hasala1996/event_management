@@ -44,7 +44,8 @@ Rename the file .example_env to .env and provide the necesary environment variab
 
 ### 5. Apply Database Migrations
 Run migrations to set up the database schema:
-python manage.py makemigrations python manage.py migrate
+- python manage.py makemigrations
+- python manage.py migrate
 
 ### 6. Seed Initial Data
 After applying the database migrations, you can populate the database with initial data by running the custom seed script located at `src/core/management/commands/seed_data.py`.
