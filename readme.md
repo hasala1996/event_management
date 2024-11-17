@@ -14,13 +14,20 @@ Welcome to the **Event Management System**, a Django-based project designed to m
 
 ---
 
+### PROJECT DEPLOY:
+To access the online service, you can do so through this link:
+`https://eventmanagement-production-92c0.up.railway.app/docs/`
+The backend is hosted there.
+Note that this service already has data in the db provided by the seed_data file that you will find later.
+Use the credentials that were sent to the email with this repo to access the admin portal.
+
 ## Installation Instructions
 
 Follow these steps to set up the project locally:
 
 ### 1. Clone the Repository
 
-git clone <repository-url> cd <project-folder>
+git clone https://github.com/hasala1996/event_management cd "project-folder"
 
 ### 2. Set Up a Virtual Environment
 
